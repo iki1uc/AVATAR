@@ -1,0 +1,28 @@
+<script src="IDkoop.js"></script>
+<script src="IDneutral.js"></script>
+<script src="IDpook.js"></script>
+      (spin)
+        ↻
+     ┌─────┐
+     │ATOM │
+     └─────┘
+   core | state
+     bond → other ATOMs
+{
+  "core": "ATOM.core",
+  "spin": 142.21992649592048,
+  "state": "excited",
+  "bonds": 2
+}
+
+<script>
+function showID(mode) {
+    const map = {
+        koop: ID_KOOP,
+        neutral: ID_NEUTRAL,
+        pook: ID_POOK
+    };
+    const id = map[mode];
+    document.getElementById("id-info").innerText = id.info();
+}
+</script>
