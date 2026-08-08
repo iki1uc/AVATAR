@@ -1,54 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>AVATAR — GEO Evolution</title>
+<canvas id="avatar" width="900" height="600"></canvas>
 
-<style>
-    body {
-        margin: 0;
-        background: #000;
-        color: #66ccff;
-        font-family: monospace;
-        text-align: center;
-        padding-top: 10vh;
-        letter-spacing: 2px;
+<script type="module">
+import PI from "../PI.js";
+import { OSF_VECTOR, ECO_ROOT_VECTOR } from "../OSF.vector";
+
+const ctx = document.getElementById("avatar").getContext("2d");
+
+const QI  = PI.phiScale(PI.pi);
+const IQQ = PI.muShift(PI.vec(1,1));
+
+const dir = OSF_VECTOR.DIR();
+const eco = ECO_ROOT_VECTOR.ECO9();
+
+// 756 Achsen erzeugen
+const AXES = [];
+for (let i = 0; i < 756; i++) {
+    AXES.push({
+        x: Math.sin(i * 0.01) * dir.dx,
+        y: Math.cos(i * 0.01) * dir.dy,
+        z: Math.sin(i * 0.02) * dir.dz,
+        w: eco * QI * IQQ.a
+    });
+}
+
+let t = 0;
+
+function animate(){
+    t += 0.01;
+    ctx.clearRect(0,0,900,600);
+
+    for (let i=0; i<AXES.length; i++){
+        const a = AXES[i];
+
+        // 4D‑Erscheinen / Verschwinden
+        const fade = Math.sin(t + a.w * 0.001);
+
+        if (fade < 0.2) continue; // Avatar verschwindet
+
+        const x = 450 + Math.sin(t + a.x * 0.002) * 200;
+        const y = 300 + Math.cos(t + a.y * 0.002) * 200;
+
+        ctx.fillStyle = `rgba(${QI*10}, ${IQQ.a*20}, 255, ${fade})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI*2);
+        ctx.fill();
     }
 
-    iframe {
-        width: 100vw;
-        height: 80vh;
-        border: none;
-    }
+    requestAnimationFrame(animate);
+}
 
-    h1 {
-        font-weight: normal;
-    }
-</style>
-
-</head>
-<body>
-
-<h1>AVATAR — GEO Evolution</h1>
-
-<iframe id="geoFrame" src="VITALITY.html"></iframe>
-
-<script>
-    const layers = [
-        "OUR/index.html",       // Ursprung / Zeichen
-        "AQUA/index.html",      // Flow / Pulse
-        "ICE/index.html",       // Kristall / Ü / F
-        "RESPO/index.html",     // Antwort / Reaktion
-        "VITALITY.html"         // Lebensenergie
-    ];
-
-    let pos = 0;
-
-    setInterval(() => {
-        pos = (pos + 1) % layers.length;
-        document.getElementById("geoFrame").src = layers[pos];
-    }, 2000);
+animate();
 </script>
-
-</body>
-</html>
