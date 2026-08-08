@@ -1,0 +1,7 @@
+TOR.pool.octacore = {
+  axes     : ["N","S","E","W","UP","DOWN","IN","OUT"],
+  pipe     : "OCTACORE-PIPE",
+  routing  : "WURMLOCH",
+  nc_link  : "NC.link",
+  worm     : "OPEN(NC.link -> WURMLOCH)"
+}

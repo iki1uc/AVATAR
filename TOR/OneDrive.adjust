@@ -1,0 +1,13 @@
+OneDrive.adjust = {
+  archive_vector   : "onedrive.vector",
+  archive_history  : "onedrive.history",
+  adjust_matrix    : "onedrive.adjust",
+
+  octacore_logs    : "onedrive.octacore",
+  wormhole_logs    : "onedrive.worm",
+  nc_link_history  : "onedrive.nc",
+
+  gpu_optimize     : true,
+  auto_balance     : true,
+  state            : "ready"
+}

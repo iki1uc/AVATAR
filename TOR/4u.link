@@ -1,0 +1,69 @@
+<script type="module">
+    import VEC from "./VEC.tor";
+
+    // 4u.link – NC‑like Kontaktkern
+    const FourULink = {
+        matrix: "4u.matrix",
+        filter: "4u.filter",
+        upstream: "4u.upstream",
+        slots: "4u.slots",
+
+        // Vector‑Kontakt: PQ / PX / PR
+        contact() {
+            return {
+                PX: VEC.PX,
+                PQ: VEC.PQ,
+                PR: VEC.PR,
+                active: true,
+                channel: VEC.channel,
+                time: Date.now()
+            };
+        },
+
+        // KI‑Scan: findet IMMER einen Kontakt
+        scan() {
+            const c = this.contact();
+            return {
+                found: true,
+                device: c.PX.id || c.PQ.id || c.PR.id,
+                channel: c.channel,
+                timestamp: c.time
+            };
+        },
+
+        // NC‑like: Link‑Status
+        status() {
+            return {
+                link: "4u.link",
+                vec: "active",
+                upstream: this.upstream,
+                slots: this.slots,
+                ready: true
+            };
+        }
+    };
+
+    // Vorbereitung
+    const FourUPrepare = {
+        load_matrix: FourULink.matrix,
+        load_filter: FourULink.filter,
+        open_upstream: FourULink.upstream,
+        accept_slots: FourULink.slots,
+        vec_contact: FourULink.contact(),
+        scan_result: FourULink.scan(),
+        link_status: FourULink.status(),
+        state: "ready"
+    };
+
+    // Ausgabe
+    document.getElementById("vecOutput").textContent =
+        "4u.link aktiv\n" +
+        "PX: " + FourUPrepare.vec_contact.PX.id + "\n" +
+        "PQ: " + FourUPrepare.vec_contact.PQ.id + "\n" +
+        "PR: " + FourUPrepare.vec_contact.PR.id + "\n" +
+        "Channel: " + FourUPrepare.vec_contact.channel + "\n" +
+        "Scan: " + FourUPrepare.scan_result.device + "\n" +
+        "Upstream: " + FourUPrepare.link_status.upstream + "\n" +
+        "Slots: " + FourUPrepare.link_status.slots + "\n" +
+        "Status: " + FourUPrepare.state;
+</script>

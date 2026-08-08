@@ -1,0 +1,8 @@
+TOR.pool.onedrive = {
+  vector_archive   : "onedrive.vector",
+  run_history      : "onedrive.history",
+  self_adjust      : "onedrive.adjust",
+  octacore_logs    : "onedrive.octacore",
+  wormhole_logs    : "onedrive.worm",
+  nc_link_history  : "onedrive.nc"
+}

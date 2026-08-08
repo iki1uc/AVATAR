@@ -1,0 +1,28 @@
+// id.room – Identitäts‑Raum
+
+const ID_ROOM = {
+    id: "id.room",
+    version: "1.0",
+    type: "IDENTITY",
+    state: "ACTIVE",
+
+    vector: {
+        id: "V-ROOT",
+        axis: ["X","Y","Z"],
+        dir: ["IN","OUT","PASS"],
+        level: "AXIOM",
+        state: "ACTIVE",
+
+        map: {
+            S1: "X-IN",
+            S2: "X-OUT",
+            S3: "Y-IN",
+            S4: "Y-OUT",
+            S5: "Z-IN",
+            S6: "Z-OUT",
+            S7: "PASS-X",
+            S8: "PASS-Y",
+            S9: "PASS-Z"
+        }
+    }
+};

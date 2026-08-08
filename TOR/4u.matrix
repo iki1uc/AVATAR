@@ -1,0 +1,27 @@
+4u.matrix = {
+  axis_competence : {
+    N     : "open",
+    S     : "open",
+    E     : "open",
+    W     : "open",
+    UP    : "stable",
+    DOWN  : "stable",
+    IN    : "priority",
+    OUT   : "priority"
+  },
+
+  vector_behavior : {
+    drift_control   : "enabled",
+    underflow_block : true,
+    overflow_block  : true,
+    passthrough     : "centered"
+  },
+
+  request_rules : {
+    filter     : "4u.filter",
+    upstream   : "4u.upstream",
+    slot       : "4u.slots"
+  },
+
+  state : "active"
+}

@@ -1,0 +1,10 @@
+TOR.pool.core = {
+  ncylinder      : "tmp.outer",
+  whirl          : "whrl-tech",
+  beam_points    : true,
+  rotation       : "3-6-9-0-3",
+  ki_respo       : 327,
+  vector_rights  : "temp-slot",
+  grant_mode     : "auto",
+  revoke_mode    : "on-close"
+}

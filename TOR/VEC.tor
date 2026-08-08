@@ -1,0 +1,28 @@
+// VEC.tor — universeller Vector-Kanal für PQ, PX, PR
+
+const VEC = {
+    PX: { device: "Apple",  id: "PX-APPLE",  state: "ACTIVE" },
+    PQ: { device: "Laptop", id: "PQ-LAPTOP", state: "ACTIVE" },
+    PR: { device: "PC",     id: "PR-PC",     state: "ACTIVE" },
+
+    channel: "VECTOR",
+    mode: "P2P",
+    terminator: "NULL",
+
+    send(from, to, data) {
+        return {
+            from,
+            to,
+            data,
+            time: Date.now(),
+            end: this.terminator
+        };
+    },
+
+    recv(packet) {
+        packet.end = "OK";   // Terminierung
+        return packet;
+    }
+};
+
+export default VEC;

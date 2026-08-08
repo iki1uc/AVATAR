@@ -1,0 +1,6 @@
+TOR.pool.4u = {
+  competence_matrix : "4u.matrix",
+  request_filter    : "4u.filter",
+  upstream_channel  : "4u.upstream",
+  vector_slots      : "4u.slots"
+}

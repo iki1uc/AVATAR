@@ -1,0 +1,11 @@
+TOR.verify.log = {
+  last_check      : "none",
+  last_state      : "idle",
+  last_vector     : "none",
+  last_axis       : "none",
+  last_wormhole   : "none",
+  last_nc_link    : "none",
+  integrity       : "stable",
+  system_loyal    : true,
+  rule_conform    : true
+}

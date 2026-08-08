@@ -1,0 +1,21 @@
+Vector.run = {
+  engine : "GPU",
+  axes   : TOR.pool.octacore.axes,
+
+  routing : {
+    wormhole : TOR.pool.octacore.routing,
+    nc_link  : TOR.pool.octacore.nc_link,
+    pipe     : TOR.pool.octacore.pipe
+  },
+
+  behavior : {
+    four_re   : ["N","S","E","W"],
+    in_out    : ["IN","OUT"],
+    six_e     : ["N","S","E","W","UP","DOWN"],
+    six_d     : "centered-6d",
+    passthrough : "4u.center"
+  },
+
+  output : "onedrive.vector",
+  state  : "running"
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>TOR Verify Layer</title>
+<style>
+    body { background:#0a0a0a; color:#e0e0e0; font-family:Consolas, monospace; padding:20px; }
+    h1 { color:#00ffcc; }
+    h2 { color:#00e0ff; }
+    pre { background:#111; padding:15px; border-left:4px solid #00ffcc; }
+    .block { margin-bottom:40px; }
+</style>
+</head>
+<body>
+
+<h1>TOR Verify Layer</h1>
+<p>Dieser Layer stellt sicher, dass TOR in keiner Situation ein Gefahrenpotenzial erzeugt.  
+Alle Handlungen sind regelkonform, systemtreu und vollständig kontrolliert.</p>
+
+<div class="block">
+<h2>Verify-Konfiguration</h2>
+<pre>
+VERIFY.layer = {
+  rule_conform       : true,        // nur erlaubte Regeln
+  system_loyal       : true,        // keine Systemabweichung
+  no_external_exec   : true,        // keine Fremd-Ausführung
+  no_risk_behavior   : true,        // kein Gefahrenpotenzial
+  axis_safe          : true,        // Achsen dürfen nicht kollidieren
+  wormhole_safe      : true,        // WURMLOCH nur kontrolliert
+  nc_link_secure     : true,        // NC.link nur intern
+  vector_integrity   : "strict",    // Vector darf nicht kippen
+  fallback_mode      : "halt",      // bei Fehler: sofort stoppen
+  audit_log          : "TOR.verify.log"
+}
+</pre>
+</div>
+
+<div class="block">
+<h2>Verify-Regeln</h2>
+<pre>
+VERIFY.rules = {
+  allow_temp_slots     : true,
+  forbid_axis_overlap  : true,
+  forbid_unchecked_run : true,
+  require_4u_matrix    : true,
+  require_onedrive_adj : true,
+  require_nc_binding   : true,
+  require_worm_control : true,
+  gpu_safe_mode        : true
+}
+</pre>
+</div>
+
+<div class="block">
+<h2>Verify-Check</h2>
+<pre>
+VERIFY.check = function(TOR) {
+  if (!TOR.verify.rule_conform) return "HALT: Regelbruch";
+  if (!TOR.verify.system_loyal) return "HALT: Systemabweichung";
+  if (!TOR.verify.axis_safe) return "HALT: Achsenkollision";
+  if (!TOR.verify.wormhole_safe) return "HALT: WURMLOCH unsicher";
+  if (!TOR.verify.nc_link_secure) return "HALT: NC.link extern";
+  if (TOR.verify.vector_integrity !== "strict") return "HALT: Vector instabil";
+
+  return "OK: TOR ist sicher und regelkonform.";
+}
+</pre>
+</div>
+
+<div class="block">
+<h2>Audit-Log</h2>
+<pre>
+TOR.verify.log = {
+  last_check      : "pending",
+  last_state      : "unknown",
+  last_vector     : "none",
+  last_axis       : "none",
+  last_wormhole   : "none",
+  last_nc_link    : "none"
+}
+</pre>
+</div>
+
+</body>
+</html>

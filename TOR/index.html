@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Vector System – Index</title>
+
+<style>
+    body { background:#0a0a0a; color:#e0e0e0; font-family:Consolas, monospace; padding:20px; }
+    h1 { color:#00e0ff; }
+    pre { background:#111; padding:15px; border-left:4px solid #00e0ff; }
+    button {
+        background:#00e0ff; border:none; padding:10px 20px;
+        font-family:Consolas; cursor:pointer; margin-top:10px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Vector System – Index</h1>
+<p>Dieses Modul lädt <strong>VEC.tor</strong> und ermöglicht PQ ↔ PX ↔ PR Routing.</p>
+
+<pre id="output">Vector-System bereit…</pre>
+
+<button id="testBtn">Vector-Test ausführen</button>
+
+<script type="module">
+    import VEC from "./VEC.tor";
+
+    // TOR / System / Vector-Bindung
+    const System = {
+        vec: VEC,
+        route(from, to, data) {
+            const packet = this.vec.send(from, to, data);
+            return this.vec.recv(packet);
+        }
+    };
+
+    // UI-Test
+    document.getElementById("testBtn").onclick = () => {
+        const result = System.route("PQ-LAPTOP", "PX-APPLE", "Hallo Apple");
+        document.getElementById("output").textContent =
+            JSON.stringify(result, null, 2);
+    };
+</script>
+
+</body>
+</html>

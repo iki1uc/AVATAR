@@ -1,0 +1,36 @@
+TOR.respo = {
+  mode        : "octacore-run",
+  type        : "EVO",
+
+  // CORE
+  ncylinder      : "tmp.outer",
+  whirl          : "whrl-tech",
+  beam_points    : true,
+  rotation       : "3-6-9-0-3",
+  ki_respo       : 327,
+
+  // RIGHTS
+  vector_rights  : "temp-slot",
+  grant_mode     : "auto",
+  revoke_mode    : "on-close",
+
+  // OCTACORE
+  axes           : ["N","S","E","W","UP","DOWN","IN","OUT"],
+  pipe           : "OCTACORE-PIPE",
+  routing        : "WURMLOCH",
+  nc_link        : "NC.link",
+  worm           : "OPEN(NC.link -> WURMLOCH)",
+
+  // 4U PREP
+  competence     : "4u.matrix",
+  upstream       : "4u.upstream",
+  vector_slots   : "4u.slots",
+
+  // ONEDRIVE
+  archive        : "onedrive.vector",
+  adjust         : "onedrive.adjust",
+
+  // OUTPUT
+  output         : "Vector.run",
+  state          : "ready"
+}
