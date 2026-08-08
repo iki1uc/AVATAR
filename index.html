@@ -1,77 +1,54 @@
-<!-- iki1uc — 4D ADVANCED PRO DIAMANT INDEX v1.0 -->
-<index id="EDIT-4D" class="diamond" layer="7">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AVATAR — GEO Evolution</title>
 
-    <!-- Identity -->
-    <identity core="EDIT" mode="founder" dimension="4D">
-        <math>3D + x² = 4D</math>
-        <signature>EDT‑4D‑DIAMANT‑01</signature>
-        <superlage>OK NOK FLOW BREAK ECHO VOID ROOT</superlage>
-        <sync>NC²□.sync</sync>
-    </identity>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #66ccff;
+        font-family: monospace;
+        text-align: center;
+        padding-top: 10vh;
+        letter-spacing: 2px;
+    }
 
-    <!-- 4D Raum -->
-    <space dimension="4D">
-        <axis src="axes.js" />
-        <cube src="cube9.js" />
-        <orbit src="cxr.orbit.js" />
-        <geo src="GEOUniverse.js" />
-    </space>
+    iframe {
+        width: 100vw;
+        height: 80vh;
+        border: none;
+    }
 
-    <!-- x² Achsenfamilie -->
-    <axis-family>
-        <core src="X.room.CORE" />
-        <in src="X.room.IN" />
-        <out src="X.room.OUT" />
-        <a64 src="Α64‑Achsenfamilie.html" />
-    </axis-family>
+    h1 {
+        font-weight: normal;
+    }
+</style>
 
-    <!-- VECTOR‑System -->
-    <vector-system>
-        <core src="VECTOR.kapital.js" />
-        <orbit src="VECTOR.orbit.js" />
-        <pipeline src="VECTOR.pipeline12.js" />
-        <render src="VECTOR.render.js" />
-        <ultra src="VECTOR.ultra.js" />
-        <matrix src="MATRIX.me" />
-    </vector-system>
+</head>
+<body>
 
-    <!-- ATOM‑System -->
-    <atom-system>
-        <kernel src="ultra.kernel.js" />
-        <atom src="atom.js" />
-        <docs src="atom.html" />
-    </atom-system>
+<h1>AVATAR — GEO Evolution</h1>
 
-    <!-- 9hoch9 / NC‑System -->
-    <nc-system>
-        <room src="81.room" />
-        <math src="NC.math" />
-        <ultra3 src="ULTRA‑NC3×3.room" />
-        <ultra9 src="ULTRA‑NC9×9.room" />
-        <pre src="PRE9×9.math" />
-    </nc-system>
+<iframe id="geoFrame" src="VITALITY.html"></iframe>
 
-    <!-- PIPE / LOAD / SAVE -->
-    <pipeline-system>
-        <pipe src="PIPE/PIPE_CORE.js" />
-        <load src="LOAD/LOAD_CORE.js" />
-        <save src="SAVE/SAVE_CORE.js" />
-        <bridge src="respo_bridge.js" />
-    </pipeline-system>
+<script>
+    const layers = [
+        "OUR/index.html",       // Ursprung / Zeichen
+        "AQUA/index.html",      // Flow / Pulse
+        "ICE/index.html",       // Kristall / Ü / F
+        "RESPO/index.html",     // Antwort / Reaktion
+        "VITALITY.html"         // Lebensenergie
+    ];
 
-    <!-- API‑Layer -->
-    <api-layer>
-        <ghost src="ghost.js" />
-        <system src="API.system.js" />
-        <fusion src="fusion9.js" />
-        <drift src="API‑Meta‑Drift‑Monitor6D.html" />
-        <tech src="API‑6E→6D.tech‑Engine.html" />
-    </api-layer>
+    let pos = 0;
 
-    <!-- GATE / TOR -->
-    <gate-system>
-        <alpha src="GATE/ALPHA/1.room" />
-        <beta src="GATE/BETA/2.room" />
-        <gamma src="GATE/GAMMA/4.room" />
-        <delta src="GATE/DELTA/6.room" />
-        <epsilon src="GATE/EPSILON/8.room" />
+    setInterval(() => {
+        pos = (pos + 1) % layers.length;
+        document.getElementById("geoFrame").src = layers[pos];
+    }, 2000);
+</script>
+
+</body>
+</html>
