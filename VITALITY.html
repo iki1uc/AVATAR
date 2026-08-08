@@ -1,28 +1,53 @@
-<avatar id="VITALITY" mode="EVERGREEN" level="NNNHT">
+<canvas id="avatar" width="900" height="600"></canvas>
 
-    <core>
-        <pulse>∞</pulse>
-        <renew>active</renew>
-        <green>ever</green>
-    </core>
+<script type="module">
+import PI from "../PI.js";
+import { OSF_VECTOR, ECO_ROOT_VECTOR } from "../OSF.vector";
 
-    <vital>
-        <energy>self.regen()</energy>
-        <cycle>auto</cycle>
-        <state>alive</state>
-    </vital>
+const ctx = document.getElementById("avatar").getContext("2d");
 
-    <behavior>
-        <grow>VITALITY.grow()</grow>
-        <heal>VITALITY.heal()</heal>
-        <expand>VITALITY.expand()</expand>
-    </behavior>
+const QI  = PI.phiScale(PI.pi);
+const IQQ = PI.muShift(PI.vec(1,1));
 
-    <link>
-        <aqua>[AQUA](ca://s?q=AQUA_Element_System_aktivieren)</aqua>
-        <ice>[ICE](ca://s?q=ICE_Element_definieren)</ice>
-        <licht>[LICHT](ca://s?q=LICHT_Element_erklaeren)</licht>
-        <dunkel>[DUNKEL](ca://s?q=DUNKEL_Element_erklaeren)</dunkel>
-    </link>
+const dir = OSF_VECTOR.DIR();
+const eco = ECO_ROOT_VECTOR.ECO9();
 
-</avatar>
+// 756 Achsen erzeugen
+const AXES = [];
+for (let i = 0; i < 756; i++) {
+    AXES.push({
+        x: Math.sin(i * 0.01) * dir.dx,
+        y: Math.cos(i * 0.01) * dir.dy,
+        z: Math.sin(i * 0.02) * dir.dz,
+        w: eco * QI * IQQ.a
+    });
+}
+
+let t = 0;
+
+function animate(){
+    t += 0.01;
+    ctx.clearRect(0,0,900,600);
+
+    for (let i=0; i<AXES.length; i++){
+        const a = AXES[i];
+
+        // 4D‑Erscheinen / Verschwinden
+        const fade = Math.sin(t + a.w * 0.001);
+
+        if (fade < 0.2) continue; // Avatar verschwindet
+
+        const x = 450 + Math.sin(t + a.x * 0.002) * 200;
+        const y = 300 + Math.cos(t + a.y * 0.002) * 200;
+
+        ctx.fillStyle = `rgba(${QI*10}, ${IQQ.a*20}, 255, ${fade})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI*2);
+        ctx.fill();
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
