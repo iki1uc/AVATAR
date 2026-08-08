@@ -1,25 +1,63 @@
-<canvas id="avatar" width="900" height="600"></canvas>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AVATAR — Furore Master PI</title>
+
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #66ccff;
+        font-family: monospace;
+        text-align: center;
+        padding-top: 5vh;
+        letter-spacing: 2px;
+    }
+
+    canvas {
+        display: block;
+        margin: 0 auto;
+        background: #000;
+        border: none;
+    }
+
+    h1 {
+        font-weight: normal;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>AVATAR — Furore Master PI</h1>
+
+<canvas id="furore" width="900" height="600"></canvas>
 
 <script type="module">
-import PI from "../PI.js";
-import { OSF_VECTOR, ECO_ROOT_VECTOR } from "../OSF.vector";
 
-const ctx = document.getElementById("avatar").getContext("2d");
+import PI from "./PI.js";
+import { OSF_VECTOR, ECO_ROOT_VECTOR } from "./OSF.vector";
 
+// QI / IQQ
 const QI  = PI.phiScale(PI.pi);
 const IQQ = PI.muShift(PI.vec(1,1));
 
-const dir = OSF_VECTOR.DIR();
-const eco = ECO_ROOT_VECTOR.ECO9();
+// OSF + ECO
+const DIR = OSF_VECTOR.DIR();
+const ECO = ECO_ROOT_VECTOR.ECO9();
+
+// Canvas
+const ctx = document.getElementById("furore").getContext("2d");
 
 // 756 Achsen erzeugen
 const AXES = [];
 for (let i = 0; i < 756; i++) {
     AXES.push({
-        x: Math.sin(i * 0.01) * dir.dx,
-        y: Math.cos(i * 0.01) * dir.dy,
-        z: Math.sin(i * 0.02) * dir.dz,
-        w: eco * QI * IQQ.a
+        x: Math.sin(i * 0.01) * DIR.dx,
+        y: Math.cos(i * 0.01) * DIR.dy,
+        z: Math.sin(i * 0.02) * DIR.dz,
+        w: ECO * QI * IQQ.a
     });
 }
 
@@ -32,13 +70,14 @@ function animate(){
     for (let i=0; i<AXES.length; i++){
         const a = AXES[i];
 
-        // 4D‑Erscheinen / Verschwinden
+        // 4D Fade — Avatar erscheint / verschwindet
         const fade = Math.sin(t + a.w * 0.001);
 
-        if (fade < 0.2) continue; // Avatar verschwindet
+        if (fade < 0.25) continue; // Avatar verschwindet
 
-        const x = 450 + Math.sin(t + a.x * 0.002) * 200;
-        const y = 300 + Math.cos(t + a.y * 0.002) * 200;
+        // Pilz‑Master‑Form (mythisch)
+        const x = 450 + Math.sin(t + a.x * 0.002) * (200 + Math.sin(i*0.01)*20);
+        const y = 300 + Math.cos(t + a.y * 0.002) * (150 + Math.cos(i*0.01)*20);
 
         ctx.fillStyle = `rgba(${QI*10}, ${IQQ.a*20}, 255, ${fade})`;
         ctx.beginPath();
@@ -50,4 +89,8 @@ function animate(){
 }
 
 animate();
+
 </script>
+
+</body>
+</html>
